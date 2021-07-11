@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Popup</title>
+	<style type="text/css">
+		body {
+			min-width: 400px;
+		}
+
+		section {
+			margin: 12px 0;
+		}
+
+		h1, h3 {
+			color: darkblue;
+		}
+
+		h3 {
+			border-left: 4px solid orange;
+			border-bottom: 1px solid orange;
+			padding-left: 5px;
+		}
+
+		p {
+			padding-left: 4px;
+		}
+
+		form {
+			padding: 0 6px 10px 6px;
+		}
+		button {
+			color: #007AFF;
+			border: 2px solid #007AFF;
+			border-radius: 4px;
+			padding: 6px 12px;
+			background-color: white;
+		}
+		button:not(:disabled):hover {
+			background-color: #edf6ff;
+			cursor: pointer;
+		}
+		button:active {
+			background-color: #007AFF;
+			color: white;
+		}
+		button:disabled {
+			color: lightgray;
+			border-color: lightgray;
+		}
+
+		#inputs {
+			display: flex;
+			padding-bottom: 6px;
+			justify-content: space-between;
+		}
+		#inputs input:first-child {
+			font-weight: bold;
+		}
+		#inputs input {
+			width: 50%;
+		}
+
+		input {
+			padding-left: 3px;
+		}
+
+		.right {
+			text-align: right;
+		}
+
+		.row:first-child {
+			border-top: none
+		}
+		.row {
+			display: flex;
+			padding: 6px 0;
+			border-top: 1px solid gray;
+		}
+		.rule {
+			flex-grow: 4;
+		}
+
+		.host {
+			font-weight: bold;
+		}
+		.path {
+			color: darkgray;
+		}
+		.indicator {
+			width:  10px;
+			visibility: hidden;
+		}
+		.current .indicator {
+			visibility: visible;
+		}
+		.delete-rule {
+			color: black;
+			text-decoration: none;
+		}
+	</style>
+</head>
+<body>
+	<template id="rule-row">
+		<div class="row">
+			<span class="indicator">›</span>
+			<span class="rule">
+				<span class="host"></span>
+				<span class="path"></span>
+			</span>
+			<a href="#" class="delete-rule">Delete</a>
+		</div>
+	</template>
+
+	<h1>UUID highlight</h1>
+	<div class="right">
+		<button id="enable-on-page">Enable on current page</button>
+	</div>
+	
+	<h3>Host rules</h3>
+	<p>
+		Rules are here to restrict on which website the extension will be executed
+		<br><br>
+		The default rules include some common issue trackers
+	</p>
+
+	<section id="rows"></section>
+
+	<h3>Add a new host rule</h3>
+	<form id="new-rule">
+		<div id="inputs">
+			<input type="text" id="host" placeholder="host">
+			<input type="text" id="path" placeholder="path">
+		</div>
+		<div class="right">
+			<button id="add-rule">Add a new rule</button>
+		</div>
+	</form>
+
+	<h3>Reset</h3>
+	<div class="right">
+		<button id="reset">Reset rules to defaults</button>
+	</div>
+
+	<script src="main.js"></script>
+	<script src="popup.js"></script>
+</body>
+</html>

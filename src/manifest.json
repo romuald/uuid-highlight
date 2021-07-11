@@ -1,0 +1,16 @@
+{
+  "name": "UUID highlight",
+  "description": "Highlight your UUIDs",
+  "version": "1.0",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "permissions": ["storage", "activeTab",  "scripting"],
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["main.js"]
+    }
+  ]
+}
