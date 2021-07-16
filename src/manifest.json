@@ -4,7 +4,10 @@
   "version": "1.0",
   "manifest_version": 3,
   "action": {
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon16.png"
+    }
   },
   "permissions": ["storage", "activeTab",  "scripting"],
   "content_scripts": [
