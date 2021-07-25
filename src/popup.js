@@ -82,7 +82,7 @@ function enableOnPage(event) {
 	
 		chrome.scripting.executeScript({
 			target: {tabId: tab.id},
-			function: main,
+			function: uuid_main,
 		}, (results) => {
 			const changed = results[0].result
 

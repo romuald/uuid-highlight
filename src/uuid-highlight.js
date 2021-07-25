@@ -54,13 +54,13 @@ loadRules().then((x, y) => {
 
     for ( var rule of CURRENT_RULES ) {
         if ( urlMatch(window.location, rule) ) {
-            main()
+            uuid_main()
             break
         }
     }
 })
 
-function main() {
+function uuid_main() {
     const UUID = /[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}/i;
 
     const UUIDNodes = {} // { $uuid: [] }
@@ -159,61 +159,17 @@ function main() {
         const length = Object.keys(UUIDNodes).length
         const increment = 360 / length
         let hue = start
-        if ( 1 ) {
-            for ( const nodes of Object.values(UUIDNodes) ) {
-                const color = `hsl(${hue}, 50%, 50%)`
-                hue += increment
-                
-                for ( const node of nodes ) {
-                    node.style.color = node.dataset.uuidcolor = color
-                }
 
-            }
-        } else {
-            const encoder = new TextEncoder()
-            const promises = []
-            for (var uuid of Object.keys(UUIDNodes)) {
-                const promise = crypto.subtle.digest('sha-1', encoder.encode(uuid));
-                promises.push(promise)
+        for ( const nodes of Object.values(UUIDNodes) ) {
+            const color = `hsl(${hue}, 50%, 50%)`
+            hue += increment
+            
+            for ( const node of nodes ) {
+                node.style.color = node.dataset.uuidcolor = color
             }
 
-            Promise.all(promises).then((hashed) => {
-                const todo = Object.values(UUIDNodes)
-                for (var [i, nodes] of todo.entries() ) {
-                    const hash = new Int16Array(hashed[i])
-                    const hash2 = new Int8Array(hashed[i])
-                    let j = 0, k = 0
-
-                    let match
-                    const fnode = nodes[0]
-                    const text = fnode.innerText
-                    const xo = /[^-]+/g
-                    let children = []
-                    while ( match = xo.exec(text) ) {
-                        const h = Math.abs(hash[j++]) % 360;
-                        const s = 50 + (hash2[k++] % 10)
-                        const l = 50 + (hash2[k++] % 10)
-                        const color = `hsl(${h}, ${s}%, ${l}%)`
-
-                        const elt = document.createElement('span')
-                        elt.innerText = match[0]
-                        elt.style.color = color
-                        children.push(elt)
-                    }
-                    console.log(children,children[0].innerText)
-
-                    for ( const node of nodes ) {
-                        node.innerHTML = ""
-                        for ( var meh of children ) {
-                            node.appendChild(meh.cloneNode(true))
-                            node.appendChild(document.createTextNode("-"))
-                        }
-                        //node.style.color = node.dataset.uuidcolor = color
-                    }
-                }
-            })
         }
-
+    
         return nodes.length > 0
     }
 

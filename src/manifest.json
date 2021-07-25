@@ -1,6 +1,6 @@
 {
   "name": "UUID highlight",
-  "description": "Highlight your UUIDs",
+  "description": "Colorize UUIDs on issue trackers to distinguish them easily",
   "version": "1.0",
   "manifest_version": 3,
   "action": {
@@ -8,12 +8,16 @@
     "default_icon": {
       "16": "icon16.png"
     }
+  },  
+  "icons": {
+    "16": "icon16.png",
+    "128": "icon128.png"
   },
   "permissions": ["storage", "activeTab",  "scripting"],
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
-      "js": ["main.js"]
+      "js": ["uuid-highlight.js"]
     }
   ]
 }
